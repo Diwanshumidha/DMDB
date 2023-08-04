@@ -65,7 +65,7 @@ const [popular, setpopular] = useState();
           slideShadows: true,
         }}
         
-
+        
         modules={[Keyboard,Mousewheel,EffectCoverflow]}
         mousewheel={{
           sensitivity:1,

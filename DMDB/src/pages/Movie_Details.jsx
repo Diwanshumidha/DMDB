@@ -103,9 +103,9 @@ const Movie_Details = () => {
 
                 <div className="mt-4 ">
                   Director:{" "}
-                  <span className="text-gray-500">
+                  <Link className="text-gray-500" to={`/person/${diretor && diretor[0].id}`}>
                     {diretor && diretor[0]?.name}
-                  </span>
+                  </Link>
                 </div>
                 {trailer && <a target="_blank" rel="noreferrer" href={`https://www.youtube.com/watch?v=${trailer[0]?.key}`} className="mt-8 border-2 w-max border-white px-4 hover:bg-white flex gap-2 hover:text-black rounded-lg py-3">
                   <BsFillPlayFill />
@@ -123,8 +123,9 @@ const Movie_Details = () => {
           <div className="flex gap-5 scroll-m-3 mb-8">
             {data?.credits?.cast.slice(0, 15).map((person) => {
               return (
-                <div
+                <Link
                   key={person.id}
+                  to={`/person/${person.id}`}
                   className="flex flex-col flex-shrink-0 justify-center items-center gap-3"
                 >
                   <img
@@ -135,7 +136,7 @@ const Movie_Details = () => {
                   <p className="text-gray-400 text-sm text-center max-w-[20ch]">
                     {person.character && person.character}
                   </p>
-                </div>
+                </Link>
               );
             })}
 
@@ -219,9 +220,9 @@ const Movie_Details = () => {
             ))}</span>
           </div>
 
-          <div className=" border-b-[1px] border-gray-400 py-4 flex gap-3">
+          <div className=" border-b-[1px] border-gray-400 py-4 flex gap-3 items-center">
             <span className="text-base">Production Houses: </span>
-            <span className="text-base text-gray-400 flex gap-5">{data?.production_companies.slice(0, 3).map((item) => {
+            <span className="text-base text-gray-400 flex gap-5">{data?.production_companies.slice(0, 2).map((item) => {
               return (
                 <div key={item.id} className="flex h-8 gap-2 items-center "><span>{item.name}</span></div>
               )
