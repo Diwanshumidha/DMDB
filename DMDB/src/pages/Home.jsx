@@ -6,11 +6,30 @@ import MoviesContainer from "../components/MoviesContainer";
 import Hero from "../components/Hero";
 import Loader from "../components/Loader/Loader";
 import { Link } from "react-router-dom";
-import { Keyboard,Mousewheel } from "swiper/modules";
+import { EffectCoverflow, Keyboard,Mousewheel } from "swiper/modules";
 import romimage from '../assets/Romance.jpg'
 
 const Home = () => {
-  const [popular, setpopular] = useState();
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    // Function to update isMobile when the window is resized
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Event listener to handle window resize
+    window.addEventListener('resize', handleResize);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+
+  
+const [popular, setpopular] = useState();
 
  
   const { data: Trending, loading: TrendingLoading } = useFetchData(
@@ -30,15 +49,24 @@ const Home = () => {
   }, [data]);
 
   return (
-    <div className="container mx-auto px-11 mb-8 pt-[90px] ">
+    <div className="container mx-auto md:px-11 mb-8 pt-[90px] ">
       <Hero popular={Trending?.results} />
-
+      
       <Swiper
         className=" mt-14"
         spaceBetween={50}
         slidesOffsetAfter={30}
+        effect={isMobile?'coverflow':''}
+        coverflowEffect={{
+          rotate: 10,
+          stretch: 0,
+          depth: 200,
+          modifier: 1,
+          slideShadows: true,
+        }}
+        
 
-        modules={[Keyboard,Mousewheel]}
+        modules={[Keyboard,Mousewheel,EffectCoverflow]}
         mousewheel={{
           sensitivity:1,
           noMousewheelClass:true,
@@ -47,7 +75,15 @@ const Home = () => {
         }}
         grabCursor={true}
         
+        
         breakpoints={{
+          200:{
+            slidesPerView:1.3,
+            spaceBetween: 20,
+            effect:'coverflow',
+            centeredSlides:true
+            
+          },
           640: {
             slidesPerView: 2,
             spaceBetween: 20,
@@ -209,7 +245,7 @@ const Home = () => {
 
 
       </Swiper>
-
+      <div className=" max-md:px-10">
       <h2 className="text-white my-10 text-3xl ">Top Rated Movies</h2>
       {Theatresloading ? (
         <div className=" text-white">
@@ -288,6 +324,7 @@ const Home = () => {
       ) : (
         <MoviesContainer popular={popular} />
       )}
+      </div>
     </div>
   );
 };

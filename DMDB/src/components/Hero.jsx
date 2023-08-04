@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 const Hero = ({ popular }) => {
   const randomkey = Math.floor(Math.random() * 10)
   return (
-    <div className=" h-[70vh] bg-[#072755] shadow-xl relative">
+    <div className=" h-[70vh] max-md:h-[50vh] max-sm:h-[40vh] bg-[#072755] shadow-xl relative">
 
       
       {popular ? <Link to={`/movie/${popular[randomkey]?.id}`}>
