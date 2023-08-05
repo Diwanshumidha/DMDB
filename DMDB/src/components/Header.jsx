@@ -5,6 +5,7 @@ import { Link, NavLink } from 'react-router-dom';
 import genres from '../utils/genres';
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { MdClose } from 'react-icons/md'
+import logo from '../assets/logo.png'
 
 
 
@@ -184,31 +185,27 @@ const Header = () => {
         )}
       </div>
 
-      <div className={`${!ismenuOpen ? 'clip-hidden' : 'clip-visible'}  md:hidden flex-col fixed flex w-full backdrop-filter mobile_menu  backdrop-blur-2xl top-0 left-0 bg-opacity-97 bg-primary-green shadow-lg px-5 py-5  h-screen items-center`}>
-      <div className=' text-white ml-auto text-3xl hover:text-[#072755] cursor-pointer   ' onClick={handlemenuOpen}> <MdClose/></div>
+      <div className={`${!ismenuOpen ? 'clip-hidden' : 'clip-visible'}  md:hidden flex-col fixed flex w-full backdrop-filter mobile_menu  backdrop-blur-2xl top-0 left-0 bg-opacity-10 bg-black shadow-lg px-5 py-5  h-screen items-center`}>
+      <div className=' flex justify-between items-center  w-full'>
+        <img src={logo} className=' w-[200px] ' alt="" />
+      <div className=' text-white text-3xl hover:text-[#072755] cursor-pointer   ' onClick={handlemenuOpen}> <MdClose/></div>
+      </div>
         <ul className={` gap-3 items-center  md:flex flex-col  overflow-scroll  text-white p-5 `}>
           <li className=' h-5 text-3xl mt-7 '>
             <NavLink onClick={() => { setismenuOpen(false) }} to={"/"} >Home</NavLink>
           </li>
           <li className=' h-5 text-3xl mt-7 '>
             <NavLink to="/" onClick={() => { setismenuOpen(false) }}>Shop</NavLink>
+            
           </li>
+
           <li className=' h-5 text-3xl mt-7 '>
             <NavLink to="/contact" onClick={() => { setismenuOpen(false) }}>Contact Us</NavLink>
           </li>
           <li className=' h-5 text-3xl mt-7'>
             <NavLink to="/about" onClick={() => { setismenuOpen(false) }}>About Us</NavLink>
           </li>
-          <li className=' h-5 text-3xl mt-7'>
-            <NavLink to="/faq">FAQ</NavLink>
-          </li>
-          <li className=' h-5 text-3xl mt-7'>
-            <NavLink to="/faq">FAQ</NavLink>
-          </li><li className=' h-5 text-3xl mt-7'>
-            <NavLink to="/faq">FAQ</NavLink>
-          </li><li className=' h-5 text-3xl mt-7'>
-            <NavLink to="/faq">FAQ</NavLink>
-          </li>
+          
 
         </ul>
 

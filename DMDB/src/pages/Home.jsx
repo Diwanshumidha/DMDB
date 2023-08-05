@@ -245,8 +245,8 @@ const Home = () => {
 
 
       </Swiper>
-      <div className=" max-md:px-10">
-        <h2 className="text-white my-10 text-3xl ">Top Rated Movies</h2>
+      <div className=" max-md:px-14">
+        <h2 className="text-white my-10 text-3xl text-center ">Top Rated Movies</h2>
         {Theatresloading ? (
           <div className=" text-white">
             <Loader />
