@@ -103,7 +103,7 @@ const Movie_Details = () => {
 
                 <div className="mt-4 ">
                   Director:{" "}
-                  <Link className="text-gray-500" to={`/person/${diretor && diretor[0].id}`}>
+                  <Link className="text-gray-500" to={`/person/${diretor && diretor[0]?.id}`}>
                     {diretor && diretor[0]?.name}
                   </Link>
                 </div>

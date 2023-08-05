@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import useFetchData from "../utils/api";
+import Card from "../components/Card";
 
 const Person = () => {
     const { personid } = useParams();
@@ -24,7 +25,7 @@ const Person = () => {
         const castAndCrew = [...movies.cast, ...movies.crew];
         const uniqueMovies = Array.from(new Set(castAndCrew.map(movie => movie.id)))
             .map(id => castAndCrew.find(movie => movie.id === id));
-        return uniqueMovies.sort((a, b) => new Date(a.release_date) - new Date(b.release_date));
+        return uniqueMovies.sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
     }
 
     // Function to sort movies by rating in descending order
@@ -53,32 +54,41 @@ const Person = () => {
 
     return (
         <div className="min-h-screen text-white container md:px-11 mx-auto h-full pt-[110px]">
-            <div>
-                <label>
-                    Sort by:
-                    <select value={sortOption} className="text-black" onChange={handleSortOptionChange}>
-                        <option value="popularity">Popularity</option>
-                        <option value="date">Date</option>
-                        <option value="rating">Rating</option>
-                    </select>
-                </label>
-            </div>
-            {console.log(data)}
+
+
             {loading ? (
-                <p>Loading...</p>
-                
+                <div>Loading....</div>
+
             ) : (
                 sortedMovies.length > 0 ? (
                     <>
-                        <h1>Movies of {data?.name}:</h1>
-                        {sortedMovies.map((movie) => {
-                            return (
-                                <h1 key={movie?.id}>{movie?.title}</h1>
-                            )
-                        })}
+                        <div className=" flex justify-between items-center">
+                            <h1 className=" text-3xl md:text-4xl my-6">Movies of {data?.name}:</h1>
+                            {console.log(data)}
+                            <div>
+                                <label className=" flex gap-3 items-center">
+                                    Sort by:
+                                    <select value={sortOption} className="text-black" onChange={handleSortOptionChange}>
+                                        <option value="popularity">Popularity</option>
+                                        <option value="date">Date</option>
+                                        <option value="rating">Rating</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5  gap-12 text-white justify-items-center flex-wrap justify-center">
+                        
+                            {sortedMovies.map((movie) => {
+                                return (
+                                    <>
+                                    <Card key={movie.id} movie={movie}></Card>
+                                    </>
+                                )
+                            })}
+                        </div>
                     </>
                 ) : (
-                    <p>No movies found for this person.</p>
+                    <p>No movies found for Person.</p>
                 )
             )}
         </div>

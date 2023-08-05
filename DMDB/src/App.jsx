@@ -6,6 +6,8 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import Footer from "./components/Footer"
 import Category from "./pages/Category"
 import Person from "./pages/Person"
+import Special from "./pages/Specials"
+import NoPage from "./pages/404page"
 
 const App = () => {
   return (
@@ -17,6 +19,10 @@ const App = () => {
       <Route path="/movie/:id" element={<Movie_Details/>}/>
       <Route path="/category/:category" element={<Category/>}/>
       <Route path="/person/:personid" element={<Person/>}/>
+      <Route path="/special/:id" element={<Special/>}/>
+      <Route path="*" element={<NoPage/>}/>
+
+
 
       
     </Routes>

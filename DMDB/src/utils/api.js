@@ -42,7 +42,7 @@ const useFetchData = (url, params,delay) => {
       else{
         fetchData();
       }
-    }, [url, params]);
+    }, [url,params]);
   
     return { data, loading, error };
   };
