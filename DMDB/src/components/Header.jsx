@@ -6,40 +6,41 @@ import genres from '../utils/genres';
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { MdClose } from 'react-icons/md'
 import logo from '../assets/logo.png'
+import Accordion from './accordion/Accordion';
 
 
 
 const MoreLinks = [
   {
-    name: 'old',
+    name: 'Old Movies',
     link: '/special/old'
   },
   {
-    name: 'indian',
+    name: 'Indian Movies',
     link: '/special/indian'
   },
   {
-    name: 'punjabi',
+    name: 'Punjabi Movies',
     link: '/special/punjabi'
   },
   {
-    name: 'earning',
+    name: 'Top Grossing',
     link: '/special/earning'
   },
   {
-    name: 'top-rated',
+    name: 'Top Rated',
     link: '/special/top'
   },
   {
-    name: 'popular',
+    name: 'Popular',
     link: '/special/popular'
   },
   {
-    name: 'trending',
+    name: 'Trending',
     link: '/special/trending'
   },
   {
-    name: 'in-theatres',
+    name: 'Theatres',
     link: '/special/theatres'
   },
 ];
@@ -185,24 +186,28 @@ const Header = () => {
         )}
       </div>
 
-      <div className={`${!ismenuOpen ? 'clip-hidden' : 'clip-visible'}  md:hidden flex-col fixed flex w-full backdrop-filter mobile_menu  backdrop-blur-2xl top-0 left-0 bg-opacity-10 bg-black shadow-lg px-5 py-5  h-screen items-center`}>
+      <div className={`${!ismenuOpen ? 'clip-hidden' : 'clip-visible'}  md:hidden flex-col fixed flex w-full backdrop-filter mobile_menu  backdrop-blur-2xl top-0 left-0 bg-opacity-40 bg-black shadow-lg px-5 py-5  h-screen items-center`}>
       <div className=' flex justify-between items-center  w-full'>
         <img src={logo} className=' w-[200px] ' alt="" />
       <div className=' text-white text-3xl hover:text-[#072755] cursor-pointer   ' onClick={handlemenuOpen}> <MdClose/></div>
       </div>
-        <ul className={` gap-3 items-center  md:flex flex-col  overflow-scroll  text-white p-5 `}>
-          <li className=' h-5 text-3xl mt-7 '>
+        <ul className={` gap-3 -z-1  items-center w-full h-full  md:flex flex-col  overflow-scroll  text-white p-5 `}>
+          <li className='  text-3xl mt-7 '>
             <NavLink onClick={() => { setismenuOpen(false) }} to={"/"} >Home</NavLink>
           </li>
-          <li className=' h-5 text-3xl mt-7 '>
-            <NavLink to="/" onClick={() => { setismenuOpen(false) }}>Shop</NavLink>
-            
+          <li className='  text-3xl mt-7 '>
+            <Accordion heading={'Categories'} key={1} map={genres?.genres.map((d)=>(
+            <NavLink to={`/category/${d.id}`} onClick={()=>{setismenuOpen(false)}} key={d.id} className='hover:text-green-600 block text-slate-200 py-1 px-7'> {d.name}</NavLink>
+
+            ))} items={genres}/>
           </li>
 
-          <li className=' h-5 text-3xl mt-7 '>
-            <NavLink to="/contact" onClick={() => { setismenuOpen(false) }}>Contact Us</NavLink>
+          <li className='  text-3xl mt-7  z-50 '>
+            <Accordion heading={'Specials'} map={MoreLinks?.map((d)=>(
+               <NavLink to={d.link} onClick={()=>{setismenuOpen(false)}} key={d.id} className='hover:text-green-600 block text-slate-200 py-1 px-7'> {d.name}</NavLink>
+            ))} items={genres}/>
           </li>
-          <li className=' h-5 text-3xl mt-7'>
+          <li className='  text-3xl mt-7'>
             <NavLink to="/about" onClick={() => { setismenuOpen(false) }}>About Us</NavLink>
           </li>
           
