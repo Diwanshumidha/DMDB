@@ -3,6 +3,7 @@ import image from '../assets/logo.png';
 import avatar from '../assets/dragon.jpg';
 import { Link, NavLink } from 'react-router-dom';
 import genres from '../utils/genres';
+import {GiHamburgerMenu} from 'react-icons/gi'
 
 
 const MoreLinks = [
@@ -61,6 +62,11 @@ const Header = () => {
   const [ismorelinksOpen, setIsmorelinksOpen] = useState(false)
   const [iscategorieOpen, setcategoriesOpen] = useState(false)
 
+  const [ismenuOpen , setismenuOpen] = useState(false)
+  const handlemenuOpen = () =>{
+    setismenuOpen(prev => !prev)
+  }
+
 
   const dropdownRef = useRef(null);
   const ismorelinkref = useRef(null)
@@ -90,8 +96,8 @@ const Header = () => {
         <Link to={'/'}>
           <img src={image} className='w-[200px]' alt='' />
         </Link>
-        <div className=' text-white h-full flex justify-center gap-4 items-center ml-7 '>
-        <NavLink className='text-lg' to={'/about'}> About </NavLink>
+        <div className=' text-white h-full  justify-center gap-4 items-center ml-7 hidden sm:flex '>
+        <NavLink className='text-lg hidden sm:flex' to={'/about'}> About </NavLink>
             <div className='relative flex gap-4 '>
 
             <button className='text-lg' onClick={()=>setIsmorelinksOpen(true)}>Specials</button>
@@ -124,7 +130,7 @@ const Header = () => {
             {iscategorieOpen && (
             <div
               ref={iscategoriesref}
-              className='absolute top-[45px] left-0 mt-2  bg-white rounded min-w-max shadow-xl'
+              className='absolute top-[45px] right-[50%] translate-x-[30%] md:translate-x-[50%]   mt-2  bg-white rounded min-w-max shadow-xl'
             >
               <div className='py-3 grid grid-cols-3 '>
                 {genres?.genres.map((link) => (
@@ -147,8 +153,12 @@ const Header = () => {
       </div>
       </div>
      
-      <div className='relative h-full flex items-center gap-2'>
-        <span className='text-gray-300 hidden md:block'>Diwanshu Midha</span>
+
+      
+      <div className='relative h-full  items-center gap-2 hidden xs:flex'>
+      <div className=' text-2xl text-white mr-4 cursor-pointer' onClick={handlemenuOpen}>
+        <GiHamburgerMenu/>
+      </div>
         <img
           src={avatar}
           onClick={handleDropdownToggle}
@@ -171,6 +181,26 @@ const Header = () => {
           </div>
         )}
       </div>
+      <div className={`${!ismenuOpen?'clip-hidden':'clip-visible'} md:hidden absolute flex w-full backdrop-filter mobile_menu  backdrop-blur-2xl top-0 bg-opacity-97 bg-primary-green shadow-lg  h-screen  justify-center `}>
+    <ul className={` gap-3 items-center  md:flex flex-col text-white p-5 `}>
+            <li className=' h-5 text-3xl mt-7 '>
+              <NavLink onClick={()=>{setismenuOpen(false)}} to={"/"} >Home</NavLink>
+            </li>
+            <li className=' h-5 text-3xl mt-7 '>
+              <NavLink to="/" onClick={()=>{setismenuOpen(false)}}>Shop</NavLink>
+            </li>
+            <li className=' h-5 text-3xl mt-7 '>
+              <NavLink to="/contact" onClick={()=>{setismenuOpen(false)}}>Contact Us</NavLink>
+            </li>
+            <li className=' h-5 text-3xl mt-7'>
+              <NavLink to="/about" onClick={()=>{setismenuOpen(false)}}>About Us</NavLink>
+            </li>
+            <li className=' h-5 text-3xl mt-7'>
+              <NavLink to="/faq">FAQ</NavLink>
+            </li>
+ 
+          </ul>
+    </div>
     </div>
   );
 };
