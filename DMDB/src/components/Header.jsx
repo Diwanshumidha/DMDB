@@ -160,13 +160,13 @@ const Header = () => {
 
 
       <div className='relative h-full  items-center gap-2 flex '>
-        <div className=' text-2xl text-white mr-4 cursor-pointer' onClick={handlemenuOpen}>
+        <div className=' text-2xl text-white mr-4 cursor-pointer md:hidden' onClick={handlemenuOpen}>
           <GiHamburgerMenu />
         </div>
         <img
           src={avatar}
           onClick={handleDropdownToggle}
-          className='w-10 h-10 rounded-full hidden xs:flex cursor-pointer hover:rotate-45 transition-all hover:shadow-2xl shadow-white duration-[1s]'
+          className='w-10 h-10 rounded-full !hidden xs:flex cursor-pointer hover:rotate-45 transition-all hover:shadow-2xl shadow-white duration-[1s]'
           alt=''
         />
         {isDropdownOpen && (

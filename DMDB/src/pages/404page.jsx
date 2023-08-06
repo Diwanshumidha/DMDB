@@ -18,7 +18,7 @@ const NoPage = () => {
     <div className="h-screen flex justify-center flex-col items-center text-white">
       <img src={img} className='w-[150px] h-[150px]' alt="" />
       <h1 className="text-3xl font-bold ">404 Page Not Found</h1>
-      <p className="text-xl mt-2">{getRandomMessage()}</p>
+      <p className="text-xl mt-2 text-center">{getRandomMessage()}</p>
     </div>
   );
 };
