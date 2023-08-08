@@ -197,6 +197,9 @@ const Header = () => {
             <NavLink onClick={() => { setismenuOpen(false) }} to={"/"} >Home</NavLink>
           </li>
           <li className='  text-3xl mt-7 '>
+            <NavLink onClick={() => { setismenuOpen(false) }} to={"/"} >Search</NavLink>
+          </li>
+          <li className='  text-3xl mt-7 '>
             <Accordion heading={'Categories'} key={1} map={genres?.genres.map((d)=>(
             <NavLink to={`/category/${d.id}`} onClick={()=>{setismenuOpen(false)}} key={d.id} className='hover:text-green-600 block text-slate-200 py-1 px-7'> {d.name}</NavLink>
 
