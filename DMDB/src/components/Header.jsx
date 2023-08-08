@@ -101,8 +101,9 @@ const Header = () => {
           <img src={image} className='w-[200px]' alt='' />
         </Link>
         <div className=' text-white h-full  justify-center gap-4 items-center ml-7 hidden sm:flex '>
-          <NavLink className='text-lg hidden sm:flex' to={'/about'}> About </NavLink>
+          <NavLink className='text-lg hidden sm:flex' to={'/search'}> Browse Movies </NavLink>
           <div className='relative flex gap-4 '>
+
 
             <button className='text-lg' onClick={() => setIsmorelinksOpen(true)}>Specials</button>
             {ismorelinksOpen && (
