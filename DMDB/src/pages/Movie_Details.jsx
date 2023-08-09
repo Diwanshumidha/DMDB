@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import { BsFillPlayFill } from 'react-icons/bs'
 import { AiTwotoneStar } from 'react-icons/ai'
 import Loader from "../components/Loader/Loader";
+import Card from "../components/Card";
 
 
 const minutesToTimeFormat = (totalMinutes) => {
@@ -24,8 +25,9 @@ const Movie_Details = () => {
   console.log(data);
 
   const { data: Theatres, loading: Theatresloading } = useFetchData(
-    '/movie/now_playing?language=en-US&page=1'
+    `/movie/${id}/recommendations?language=en-US&page=1`
   )
+  
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [data])
@@ -245,22 +247,23 @@ const Movie_Details = () => {
         </div>
 
 
-        <h4 className="text-3xl my-7"> In Theatres</h4>
+        <h4 className="text-3xl my-7"> Similar</h4>
         <div className=" grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6 mb-9 ">
           {console.log(Theatres?.results)}
           {Theatres?.results.slice(0, 10).map((movie) => (
 
-            <Link to={`/movie/${movie.id}`} className=" hover:scale-110 transition-all cursor-pointer duration-300 " key={movie.id}>
-              <div className="relative">
-                <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} className=" hover:border-white  hover:border-[5px] transition-all duration-200"></img>
-                <div className=" w-[50px] h-[50px] bg-white absolute bottom-5 font-bold right-5 text-black flex justify-center items-center shadow-2xl rounded-full opacity-80">{movie.vote_average} </div>
-              </div>
-              <div className="mt-3">
-                <p>{movie.title}</p>
+            // <Link to={`/movie/${movie.id}`} className=" hover:scale-110 transition-all cursor-pointer duration-300 " key={movie.id}>
+            //   <div className="relative">
+            //     <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} className=" hover:border-white  hover:border-[5px] transition-all duration-200"></img>
+            //     <div className=" w-[50px] h-[50px] bg-white absolute bottom-5 font-bold right-5 text-black flex justify-center items-center shadow-2xl rounded-full opacity-80">{movie.vote_average} </div>
+            //   </div>
+            //   <div className="mt-3">
+            //     <p>{movie.title}</p>
 
-                <p className="line-clamp-2 text-gray-500 mt-2">{movie.overview}</p>
-              </div>
-            </Link>
+            //     <p className="line-clamp-2 text-gray-500 mt-2">{movie.overview}</p>
+            //   </div>
+            // </Link>
+            <Card movie={movie} key={movie.id} />
           ))}
         </div>
       </div>

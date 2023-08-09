@@ -53,7 +53,7 @@ const Person = () => {
     }
 
     return (
-        <div className="min-h-screen text-white container md:px-11 mx-auto h-full pt-[110px]">
+        <div className="min-h-screen text-white container px-11 mx-auto h-full pt-[110px]">
 
 
             {loading ? (
@@ -62,11 +62,11 @@ const Person = () => {
             ) : (
                 sortedMovies.length > 0 ? (
                     <>
-                        <div className=" flex justify-between items-center">
-                            <h1 className=" text-3xl md:text-4xl my-6">Movies of {data?.name}:</h1>
+                        <div className=" flex justify-between flex-col sm:flex-row items-center">
+                            <h1 className=" text-3xl md:text-4xl my-6 text-center">Movies of {data?.name}:</h1>
                             {console.log(data)}
                             <div>
-                                <label className=" flex gap-3 items-center">
+                                <label className=" flex  gap-3 items-center">
                                     Sort by:
                                     <select value={sortOption} className="text-black" onChange={handleSortOptionChange}>
                                         <option value="popularity">Popularity</option>
