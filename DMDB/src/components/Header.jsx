@@ -7,6 +7,8 @@ import { GiHamburgerMenu } from 'react-icons/gi'
 import { MdClose } from 'react-icons/md'
 import logo from '../assets/logo.png'
 import Accordion from './accordion/Accordion';
+import Search from '../pages/Search';
+import Input from './Input/input';
 
 
 
@@ -101,7 +103,7 @@ const Header = () => {
           <img src={image} className='w-[200px]' alt='' />
         </Link>
         <div className=' text-white h-full  justify-center gap-4 items-center ml-7 hidden sm:flex '>
-          <NavLink className='text-lg hidden sm:flex' to={'/search'}> Browse Movies </NavLink>
+          <NavLink className='text-lg hidden lg:flex' to={'/search'}> Browse Movies </NavLink>
           <div className='relative flex gap-4 '>
 
 
@@ -164,8 +166,8 @@ const Header = () => {
         <div className=' text-2xl text-white mr-4 cursor-pointer md:hidden' onClick={handlemenuOpen}>
           <GiHamburgerMenu />
         </div>
-        <div className='text-2xl text-white mr-4 cursor-pointer'>
-            Search
+        <div className='text-2xl text-white mr-4 cursor-pointer max-md:hidden'>
+            <Input/>
         </div>
         <img
           src={avatar}

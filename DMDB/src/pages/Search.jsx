@@ -9,6 +9,7 @@ import ReactPaginate from 'react-paginate';
 
 // Css
 import './Search.css'
+import { useParams } from "react-router-dom";
 
 const Rating = [
     4, 5, 6, 7, 8
@@ -17,6 +18,8 @@ const Rating = [
 
 
 const Search = () => {
+    const param = useParams()
+
 
     const queryParameters = new URLSearchParams(window.location.search);
     const [currentPage, setCurrentPage] = useState(1);
@@ -26,7 +29,7 @@ const Search = () => {
             include_adult: false,
             include_video: false,
             language: "en-US",
-            sort_by: "primary_release_date.desc",
+            
             "vote_count.gte": 2,
             page: currentPage,
 
@@ -56,22 +59,26 @@ const Search = () => {
 
     const { data, loading } = useFetchData(buildApiUrl(filters));
     useEffect(() => {
+        const value = queryParameters.get("with_text_query")
+        // handleSubmit()
+        setFilters((prevFilters) => ({
+            ...prevFilters,
+            'with_text_query': value,
+        }));
 
-    }, [filters, currentPage]);
+    }, [param]);
 
 
     function handleSubmit() {
-
-
         const url = `http://localhost:5173/search?${new URLSearchParams(filters).toString()}`;
         window.history.replaceState(null, "", url);
-
     }
 
     // Function to build the API URL with filters
 
     const { data: a } = useFetchData('/configuration/countries?language=en-US')
     const { data: lang } = useFetchData('/configuration/languages')
+
     // Function to fetch available years and regions (you can customize this according to your API data)
     const fetchAvailableOptions = async () => {
         // Fetch years and regions from your API
@@ -122,13 +129,13 @@ const Search = () => {
     const totalPages = Math.min(data?.total_pages, 500);
     const handleNextClick = () => {
         if (currentPage < totalPages) {
-          setCurrentPage(prev => prev + 1);
+            setCurrentPage(prev => prev + 1);
         }
-      };
-    
-      const handleLastClick = () => {
+    };
+
+    const handleLastClick = () => {
         setCurrentPage(totalPages);
-      };
+    };
 
 
     return (
@@ -246,7 +253,7 @@ const Search = () => {
                         nextLinkClassName="page-num"
                         activeLinkClassName="active"
                     />
-                   </> : ''}
+                    </> : ''}
 
 
 
@@ -268,11 +275,11 @@ const Search = () => {
             </div>
 
             <div className=" flex mx-auto my-5 text-white w-full justify-center  gap-3">
-                        <button className="border-[hsl(215,84%,20%)] px-3 py-3 border-solid border-2 disabled:hidden " disabled={currentPage < 2} onClick={currentPage > 1?()=>{setCurrentPage(prev => prev - 1 )}:''}>Prev</button>
-                        <button className="border-[hsl(215,84%,20%)] px-3 py-3 border-solid border-2 disabled:bg-black disabled:hidden" disabled={currentPage >= totalPages} onClick={handleNextClick}>Next </button>
-                        <button className="border-[hsl(215,84%,20%)] px-3 py-3 border-solid border-2 disabled:hidden" disabled={currentPage >= totalPages} onClick={handleLastClick}>Last</button>
+                <button className="border-[hsl(215,84%,20%)] px-3 py-3 border-solid border-2 disabled:hidden " disabled={currentPage < 2} onClick={currentPage > 1 ? () => { setCurrentPage(prev => prev - 1) } : ''}>Prev</button>
+                <button className="border-[hsl(215,84%,20%)] px-3 py-3 border-solid border-2 disabled:bg-black disabled:hidden" disabled={currentPage >= totalPages} onClick={handleNextClick}>Next </button>
+                <button className="border-[hsl(215,84%,20%)] px-3 py-3 border-solid border-2 disabled:hidden" disabled={currentPage >= totalPages} onClick={handleLastClick}>Last</button>
 
-                    </div>
+            </div>
         </div>
     );
 };
